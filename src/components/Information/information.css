@@ -1,0 +1,12 @@
+.info{
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+}
+
+.btn{
+    background-color: green;
+    border: 1px solid greenyellow;
+    border-radius: 5px;
+    padding: 10px;
+}

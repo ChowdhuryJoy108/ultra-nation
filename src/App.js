@@ -1,23 +1,47 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Info from './components/Info/Info';
+import Information from './components/Information/Information';
 
 function App() {
+  const [countries, setCountry] = useState([]);
+  useEffect(() => {
+    fetch('https://restcountries.com/v3.1/all')
+      .then(res => res.json())
+      .then(data => setCountry(data))
+  }, [])
+
+
+  const [info, setInfo] = useState([]);
+  const handleInfo = (country) => {
+    const newInfo = country;
+    setInfo(newInfo);
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <div className='header'>
+        <h1>Country Loaded : {countries.length} </h1>
+      </div>
+      <div className='App'>
+        <div className='initial-info'>
+
+          <ul>
+            {
+              countries.map(country => <Information information={country}
+                handleInfo={handleInfo}
+              ></Information>)
+            }
+
+          </ul>
+        </div>
+
+        <div className='more-info'>
+          <Info info={info} />
+        </div>
+      </div>
+
     </div>
   );
 }
